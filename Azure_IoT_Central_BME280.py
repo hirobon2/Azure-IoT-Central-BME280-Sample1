@@ -19,7 +19,7 @@ iotc = iotc.Device(scopeId, deviceKey, deviceId, IOTConnectType.IOTC_CONNECT_SYM
 iotc.setLogLevel(IOTLogLevel.IOTC_LOGGING_API_ONLY)
 
 gCanSend = False
-gCounter = 0
+#gCounter = 0
 
 # BME280 init
 bus_number  = 1
@@ -195,12 +195,13 @@ while iotc.isConnected():
   hum_raw  = (data[6] << 8)  |  data[7]
 
   if gCanSend == True:
-    if gCounter % 20 == 0:
-      gCounter = 0
+#    if gCounter % 20 == 0:
+#      gCounter = 0
       #print("Sending telemetry..")
       iotc.sendTelemetry("{ \
 \"temp\": " + str(compensate_T(temp_raw)) + ", \
 \"pressure\": " + str(compensate_P(pres_raw)) + ", \
 \"humidity\": " + str(compensate_H(hum_raw)) + "}")
 
-    gCounter += 1
+#    gCounter += 1
+      time.sleep(60)
